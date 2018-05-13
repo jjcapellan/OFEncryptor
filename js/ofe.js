@@ -171,7 +171,7 @@ var ofeApp = {
    * @param {string} fileName 
    * @param {Uint8Array} outputFile 
    */
-  saveOutputFile(fileName, outputFile) {
+  saveOutputFile: function(fileName, outputFile) {
 
     var blob = new Blob([outputFile], {
       type: 'application/octet-stream'
@@ -181,7 +181,6 @@ var ofeApp = {
     anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['application/octet-stream', anchor.download, anchor.href].join(':');
     anchor.click();
-
   }
 
 }
