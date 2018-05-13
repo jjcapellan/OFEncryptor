@@ -1,0 +1,141 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background-color: #ffb53d;
+    font-family: "Arial";
+    font-size: 28px;
+}
+
+#global{
+    position: absolute;
+    height:100%;
+    width:100%;
+    text-justify: center;
+}
+
+#header{
+    color:#e5ebf0;
+    display: flex;
+    flex-direction: row;
+    height:15%;
+    text-align: center;
+    align-items: center;
+    background-color: #00718d;
+    padding-left: 5%;
+}
+
+#middleLeft{
+    font-size: 0.8em;
+    width:45%;
+    padding-top: 30px;
+    padding-left: 20px;
+    display: inline-block;
+    vertical-align:middle;
+}
+
+#middleRight{
+    height:70%;
+    width:45%;
+    padding-top: 30px;
+    display: inline-block;
+    vertical-align:top;
+}
+
+#keyNumber{
+    font-size: 1.5em;
+    text-align: center;
+    padding: 5px;
+}
+
+#lb_key{
+    font-size: 0.8em;
+}
+
+.centered{
+    margin:0 auto;
+    width: 90%;
+    padding:6px;
+
+}
+
+.container{
+    height:100%;
+    display: flex;
+    flex-flow: column;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.panel{
+    border: solid #fffefe 4px;
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 1px 3px #666666;
+    background-color: #00718d;
+    color: #e5ebf0;
+}
+
+.item{
+    display: flex;
+    flex:1;
+    flex-direction: row;
+    align-items: center;
+}
+
+.colflow{
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.btn {
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 1px 3px #666666;  
+    color: #000000;
+    font-size: 1em;
+    background: #ffb53d;
+    padding: 5px 20px 5px 20px;
+    border: solid #000000 4px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+  
+  .btn:hover {
+    color:#000000;
+    background: #e5ebf0;
+    text-decoration: none;
+  }
+
+  ol{
+      padding:40px;
+  }
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    display: inline-block;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
