@@ -68,7 +68,7 @@ var ofeApp = {
   /**
    * Encrypt / decrypt the inputfile
    * 
-   * @param {string} mode ([encrypt,decrypt])
+   * @param {string} mode encrypt,decrypt
    */
   processFile: function (mode) {
 
@@ -152,8 +152,8 @@ var ofeApp = {
   /**
    * 
    * 
-   * @param {number} position ([1-12])
-   * @returns {number} (Increment to apply to the actual byte)
+   * @param {number} position 1-12
+   * @returns {number} Increment to apply to the actual byte
    */
   getVariation: function (position) {
 
@@ -171,7 +171,7 @@ var ofeApp = {
    * @param {string} fileName 
    * @param {Uint8Array} outputFile 
    */
-  saveOutputFile(fileName, outputFile) {
+  saveOutputFile: function(fileName, outputFile) {
 
     var blob = new Blob([outputFile], {
       type: 'application/octet-stream'
