@@ -3,7 +3,7 @@
 * OFE Online files encryptor 
 *
 * @author Juan José Capellán
-* @version 1.0b
+* @version 1.1b
 */
 
 window.onload = function () {
@@ -27,7 +27,7 @@ var ofeApp = {
 
     //HTML DOM elements
     this.tb_keyNumber = document.getElementById('keyNumber');
-    this.tb_keyNumber.setAttribute('value', this.numberKey.toString());
+    this.tb_keyNumber.value=this.numberKey.toString();
     this.lb_inputFile = document.getElementById('lb_inputFile');
     this.el_inputFile = document.getElementById('inputFile');
     this.el_inputFile.addEventListener('change', this.createInputFile.bind(this), false);
@@ -56,13 +56,23 @@ var ofeApp = {
   },
 
   setEncodeMode: function () {
-    this.keysArray = this.tb_keyNumber.getAttribute('value').split('');
+    var validMsg= this.validation();
+    if(validMsg==''){
+    this.keysArray = this.tb_keyNumber.value.split('');
     this.processFile('encrypt');
+  } else {
+    alert(validMsg);
+  }
   },
 
   setDecodeMode: function () {
-    this.keysArray = this.tb_keyNumber.getAttribute('value').split('');
+    var validMsg= this.validation();
+    if(validMsg==''){
+    this.keysArray = this.tb_keyNumber.value.split('');
     this.processFile('decrypt');
+  } else {
+    alert(validMsg);
+  }
   },
 
   /**
@@ -181,6 +191,22 @@ var ofeApp = {
     anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['application/octet-stream', anchor.download, anchor.href].join(':');
     anchor.click();
+
+  },
+
+  validation: function(){
+
+    var regex = /^[0-9]{6}$/;
+
+    if(this.inputFile==null){
+      return 'Choose a file to process';
+    };
+
+    if(!regex.test(this.tb_keyNumber.value)){
+      return 'The key must be a 6-digit number (ex: 154852)'
+    };
+
+    return '';
 
   }
 
