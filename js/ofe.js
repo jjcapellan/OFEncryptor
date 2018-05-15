@@ -3,11 +3,7 @@
  * OFE Online files encryptor 
  *
  * @author Juan José Capellán
-<<<<<<< HEAD
- * @version 1.1b
-=======
  * @version 1.0
->>>>>>> 9ff408c... Working indicator
  */
 
 window.onload = function () {
@@ -63,29 +59,19 @@ var ofeApp = {
   setEncodeMode: function () {
     var validMsg = this.validation();
     if (validMsg == '') {
-<<<<<<< HEAD
-=======
       this.p_working.style.opacity = 1;
->>>>>>> 9ff408c... Working indicator
       this.keysArray = this.tb_keyNumber.value.split('');
       this.processFile('encrypt');
     } else {
       alert(validMsg);
-<<<<<<< HEAD
-    };
-=======
     }
->>>>>>> 9ff408c... Working indicator
   },
 
   setDecodeMode: function () {
     var validMsg = this.validation();
     if (validMsg == '') {
       this.keysArray = this.tb_keyNumber.value.split('');
-<<<<<<< HEAD
-=======
       this.p_working.style.opacity = 1;
->>>>>>> 9ff408c... Working indicator
       this.processFile('decrypt');
     } else {
       alert(validMsg);
