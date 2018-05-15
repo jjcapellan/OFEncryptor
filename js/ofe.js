@@ -1,10 +1,10 @@
 /**
-* @fileoverview Application to encrypt/decrypt files.
-* OFE Online files encryptor 
-*
-* @author Juan José Capellán
-* @version 1.1b
-*/
+ * @fileoverview Application to encrypt/decrypt files.
+ * OFE Online files encryptor 
+ *
+ * @author Juan José Capellán
+ * @version 1.0
+ */
 
 window.onload = function () {
   ofeApp.init();
@@ -26,8 +26,9 @@ var ofeApp = {
     this.inputFile = null;
 
     //HTML DOM elements
+    this.p_working = document.getElementById('p_working');
     this.tb_keyNumber = document.getElementById('keyNumber');
-    this.tb_keyNumber.value=this.numberKey.toString();
+    this.tb_keyNumber.value = this.numberKey.toString();
     this.lb_inputFile = document.getElementById('lb_inputFile');
     this.el_inputFile = document.getElementById('inputFile');
     this.el_inputFile.addEventListener('change', this.createInputFile.bind(this), false);
@@ -56,23 +57,25 @@ var ofeApp = {
   },
 
   setEncodeMode: function () {
-    var validMsg= this.validation();
-    if(validMsg==''){
-    this.keysArray = this.tb_keyNumber.value.split('');
-    this.processFile('encrypt');
-  } else {
-    alert(validMsg);
-  }
+    var validMsg = this.validation();
+    if (validMsg == '') {
+      this.p_working.style.opacity = 1;
+      this.keysArray = this.tb_keyNumber.value.split('');
+      this.processFile('encrypt');
+    } else {
+      alert(validMsg);
+    }
   },
 
   setDecodeMode: function () {
-    var validMsg= this.validation();
-    if(validMsg==''){
-    this.keysArray = this.tb_keyNumber.value.split('');
-    this.processFile('decrypt');
-  } else {
-    alert(validMsg);
-  }
+    var validMsg = this.validation();
+    if (validMsg == '') {
+      this.keysArray = this.tb_keyNumber.value.split('');
+      this.p_working.style.opacity = 1;
+      this.processFile('decrypt');
+    } else {
+      alert(validMsg);
+    }
   },
 
   /**
@@ -95,7 +98,11 @@ var ofeApp = {
       case 'encrypt':
         var outputFile = new Uint8Array(this.fileSize * 2); // Second byte on each pair is used to indicate 255 value of oldCode
         var limit = t.fileSize;
-        for (var i = 0; i < limit; i++) {
+        var i = 0;
+
+        /** setTimeout let update UI with "Working..." element before enter in loop*/
+        setTimeout(function(){
+        for (i = 0; i < limit; i++) {
           code = t.inputFile[i];
           variation = t.getVariation(position);
           newCode = code + variation;
@@ -116,15 +123,20 @@ var ofeApp = {
             position = 1;
           };
         };
-
         t.saveOutputFile('encrypted_' + t.fileName, outputFile);
+        t.p_working.style.opacity = 0;},500);
+
         break;
 
         /****************** DECRYPT ******************************/
       case 'decrypt':
         var outputFile = new Uint8Array(this.fileSize / 2);
-        var limit = t.fileSize
-        for (var i = 0; i < limit; i += 2) {
+        var limit = t.fileSize;
+        var i=0;
+
+        /** setTimeout let update UI with "Working..." element before enter in loop*/
+        setTimeout(function(){
+        for (i = 0; i < limit; i += 2) {
 
           if (t.inputFile[i + 1] == 1) {
             oldCode = 255;
@@ -150,6 +162,8 @@ var ofeApp = {
         };
 
         t.saveOutputFile('decrypted_' + t.fileName, outputFile);
+        t.p_working.style.opacity = 0;},500);
+
         break;
 
 
@@ -181,7 +195,7 @@ var ofeApp = {
    * @param {string} fileName 
    * @param {Uint8Array} outputFile 
    */
-  saveOutputFile: function(fileName, outputFile) {
+  saveOutputFile: function (fileName, outputFile) {
 
     var blob = new Blob([outputFile], {
       type: 'application/octet-stream'
@@ -194,15 +208,15 @@ var ofeApp = {
 
   },
 
-  validation: function(){
+  validation: function () {
 
     var regex = /^[0-9]{6}$/;
 
-    if(this.inputFile==null){
+    if (this.inputFile == null) {
       return 'Choose a file to process';
     };
 
-    if(!regex.test(this.tb_keyNumber.value)){
+    if (!regex.test(this.tb_keyNumber.value)) {
       return 'The key must be a 6-digit number (ex: 154852)'
     };
 
