@@ -3,7 +3,11 @@
  * OFE Online files encryptor 
  *
  * @author Juan José Capellán
+<<<<<<< HEAD
  * @version 1.1b
+=======
+ * @version 1.0
+>>>>>>> 9ff408c... Working indicator
  */
 
 window.onload = function () {
@@ -26,6 +30,7 @@ var ofeApp = {
     this.inputFile = null;
 
     //HTML DOM elements
+    this.p_working = document.getElementById('p_working');
     this.tb_keyNumber = document.getElementById('keyNumber');
     this.tb_keyNumber.value = this.numberKey.toString();
     this.lb_inputFile = document.getElementById('lb_inputFile');
@@ -58,17 +63,29 @@ var ofeApp = {
   setEncodeMode: function () {
     var validMsg = this.validation();
     if (validMsg == '') {
+<<<<<<< HEAD
+=======
+      this.p_working.style.opacity = 1;
+>>>>>>> 9ff408c... Working indicator
       this.keysArray = this.tb_keyNumber.value.split('');
       this.processFile('encrypt');
     } else {
       alert(validMsg);
+<<<<<<< HEAD
     };
+=======
+    }
+>>>>>>> 9ff408c... Working indicator
   },
 
   setDecodeMode: function () {
     var validMsg = this.validation();
     if (validMsg == '') {
       this.keysArray = this.tb_keyNumber.value.split('');
+<<<<<<< HEAD
+=======
+      this.p_working.style.opacity = 1;
+>>>>>>> 9ff408c... Working indicator
       this.processFile('decrypt');
     } else {
       alert(validMsg);
@@ -95,7 +112,11 @@ var ofeApp = {
       case 'encrypt':
         var outputFile = new Uint8Array(this.fileSize * 2); // Second byte on each pair is used to indicate 255 value of oldCode
         var limit = t.fileSize;
-        for (var i = 0; i < limit; i++) {
+        var i = 0;
+
+        /** setTimeout let update UI with "Working..." element before enter in loop*/
+        setTimeout(function(){
+        for (i = 0; i < limit; i++) {
           code = t.inputFile[i];
           variation = t.getVariation(position);
           newCode = code + variation;
@@ -116,15 +137,20 @@ var ofeApp = {
             position = 1;
           };
         };
-
         t.saveOutputFile('encrypted_' + t.fileName, outputFile);
+        t.p_working.style.opacity = 0;},500);
+
         break;
 
         /****************** DECRYPT ******************************/
       case 'decrypt':
         var outputFile = new Uint8Array(this.fileSize / 2);
-        var limit = t.fileSize
-        for (var i = 0; i < limit; i += 2) {
+        var limit = t.fileSize;
+        var i=0;
+
+        /** setTimeout let update UI with "Working..." element before enter in loop*/
+        setTimeout(function(){
+        for (i = 0; i < limit; i += 2) {
 
           if (t.inputFile[i + 1] == 1) {
             oldCode = 255;
@@ -150,6 +176,8 @@ var ofeApp = {
         };
 
         t.saveOutputFile('decrypted_' + t.fileName, outputFile);
+        t.p_working.style.opacity = 0;},500);
+
         break;
 
 

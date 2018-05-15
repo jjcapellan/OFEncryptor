@@ -9,6 +9,21 @@ body{
     font-size: 28px;
 }
 
+progress {
+    background:#00718d;
+  }
+  
+  progress::-webkit-progress-bar {
+    background-color:#004453;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#e5ebf0;
+    height:15px;
+  }
+  progress::-webkit-progress-value {
+    background-color:#ffb53d;
+  }
+
 #global{
     position: absolute;
     height:100%;
@@ -161,4 +176,30 @@ body{
 
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
+}
+
+/* animations */
+
+.animationLeftRight{
+    opacity: 0;
+    -webkit-animation-name: leftRight;
+            animation-name: leftRight;
+    -webkit-animation-duration: 0.8s;
+            animation-duration: 0.8s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate-reverse;
+            animation-direction: alternate-reverse;
+}
+
+@-webkit-keyframes leftRight{
+    from {-webkit-transform: scale(0.9);transform: scale(0.9)}
+    to {-webkit-transform: scale(1.1);transform: scale(1.1)}
+}
+
+@keyframes leftRight{
+    from {-webkit-transform: scale(0.9);transform: scale(0.9)}
+    to {-webkit-transform: scale(1.1);transform: scale(1.1)}
 }
